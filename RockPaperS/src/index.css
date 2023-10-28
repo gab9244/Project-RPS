@@ -62,9 +62,13 @@ body{
   justify-content: center;
   width: 140%;
   height: 500px;
+  flex-direction: column;
 
 }
-
+.WinnerDiv p{
+  font-size: 40px;
+  margin-bottom: 20px;
+}
 .Computer{
   position: absolute;
   right: 0;
@@ -77,7 +81,11 @@ body{
 }
 .Computer img {
   width: 100px;
+  position: absolute;
+  top: 20%; 
+  right: 30%;
 }
+
 .Player{
   position: absolute;
   left: 0;
@@ -87,6 +95,15 @@ body{
   align-items: center;
   border-radius: 100%;
 }
+
+.PlayerChoice{
+  width: 100px;
+  position: absolute;
+  top: 20%; 
+  right: 30%;
+}
+
+
 .PlayerScissors {
   border: 20px solid yellow;
 }

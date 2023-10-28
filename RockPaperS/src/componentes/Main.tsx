@@ -1,9 +1,8 @@
+import { useState } from 'react';
 
 
 function Main(){
-
-
-
+    const [increase, setIncrease] = useState(1)
     return(
        <> <div className="Main"> 
             <img src="/rock-paper-scissors-master/images/bg-triangle.svg" alt="A triangle" className="triangle" />
@@ -20,15 +19,20 @@ function Main(){
 
         <div className="WinnerDiv none">
             <div className="Computer">
-            <img src= {`/rock-paper-scissors-master/images/icon-paper.svg`} alt="Paper symbol" className="paper" />
+                <img className="ComputerChoice" alt="Computer Choice" />
+           
             </div>
             <div className="Player">
-            <img  className="rock PlayerChoice" />
+            <img  className=" PlayerChoice"/>
             </div>
+            <p></p>
             <button className="newGame" onClick={startNewGame}>Play Again</button>
+
         </div>
  </>
     )
+
+    
         function Winner(){
             const main = document.querySelector('.Main')
             const wDiv = document.querySelector('.WinnerDiv')
@@ -38,13 +42,46 @@ function Main(){
         }
         
        function Choice(choice:string){
-        // const img = document.createElement('img');
-        // img.className = 'playerChoice scissors'
-        // img?.setAttribute('src','')
         const img = document.querySelector('.PlayerChoice')
         const player = document.querySelector('.Player')
-        
+        const Computer = document.querySelector('.Computer')
 
+        const paperImg = document.createElement('img')
+        paperImg.src = "/rock-paper-scissors-master/images/icon-paper.svg"
+        paperImg.setAttribute('class','paperChoice')
+        paperImg.setAttribute('id','paperId')
+
+        const rockImg = document.createElement('img')
+        rockImg.src = "/rock-paper-scissors-master/images/icon-rock.svg"
+        rockImg.classList.add('rockChoice')
+
+
+        const scissorsImg = document.createElement('img')
+        scissorsImg.src = "/rock-paper-scissors-master/images/icon-scissors.svg"
+        scissorsImg.classList.add('scissorsChoice')
+
+
+        const option = [paperImg,rockImg,scissorsImg]
+        const random = option[Math.floor(Math.random() * option.length)]
+        Computer?.append(random)
+
+        if(random ==paperImg){
+            Computer?.classList.add('hasPaper')
+            Computer?.classList.remove('hasRock')
+            Computer?.classList.remove('hasScissors')
+        }
+       
+        if(random == rockImg){
+            Computer?.classList.add('hasRock')
+            Computer?.classList.remove('hasPaper')
+            Computer?.classList.remove('hasScissors')
+        }
+        if(random == scissorsImg){
+            Computer?.classList.add('hasScissors')
+            Computer?.classList.remove('hasRock')
+            Computer?.classList.remove('hasPaper')
+        }
+       
         if(choice == 'scissors' ) { 
             img?.setAttribute('src',`/rock-paper-scissors-master/images/icon-scissors.svg`)
             img?.setAttribute('alt', 'scissors')
@@ -60,21 +97,45 @@ function Main(){
             img?.setAttribute('alt', 'rock')
             player?.setAttribute('class','PlayerRock Player')
         }
+
+        const points = document.getElementById('points')
         
+        
+      
+        if(choice == 'scissors'&& Computer?.classList.contains('hasPaper')){
+            if(points) points.textContent = `${increase}`
+            setIncrease(increase +1) 
+            
+        }
+        
+
+
        }
     
         function startNewGame(){
             const main = document.querySelector('.Main')
             const wDiv = document.querySelector('.WinnerDiv')
             const img = document.querySelector('.playerChoice')
+
+            
+            const computerChoice = document.querySelector('.ComputerChoice')
+            computerChoice?.parentElement?.removeChild(computerChoice)
+
+            const ComputerChoicePaper = document.querySelector('.paperChoice')
+            ComputerChoicePaper?.parentElement?.removeChild(ComputerChoicePaper)
+
+            const ComputerChoiceRock = document.querySelector('.rockChoice')
+            ComputerChoiceRock?.parentElement?.removeChild(ComputerChoiceRock)
+
+            const ComputerChoiceScissors = document.querySelector('.scissorsChoice')
+            ComputerChoiceScissors?.parentElement?.removeChild(ComputerChoiceScissors)
+
             img?.setAttribute('src','')
             main?.classList.remove('none')
             wDiv?.classList.add('none')
+          
 
         }
-    
-
-
 }
 
 export default Main
