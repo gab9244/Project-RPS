@@ -65,7 +65,7 @@ body{
   flex-direction: column;
 
 }
-.WinnerDiv p{
+.Result{
   font-size: 40px;
   margin-bottom: 20px;
 }
@@ -114,12 +114,9 @@ body{
   border: 20px solid red;
 }
 
-
-
 .Player img{
   width: 100px;
 }
-
 
 .paperDiv{
   position: absolute;
@@ -150,7 +147,11 @@ body{
   border-radius: 100%;
 
 }
-
+.ResultDiv{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 .newGame{
   font-family: 'Barlow Semi Condensed', sans-serif;
   width: 200px;
@@ -226,8 +227,15 @@ a{
   color: white;
   cursor: pointer;
 }
+.popup-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
 .popup-inner img{
   width: 120%;
+  margin-bottom: 20px;
 }
 
 .paperDiv{
@@ -238,4 +246,42 @@ a{
 }
 .rockDiv{
   cursor: pointer;
+}
+
+
+
+@media all and (max-width:500px){
+    .Header{
+      width: 450px;
+    }
+  
+    .WinnerDiv{
+      width: 90%;
+    }
+    .Player{
+      width: 150px;
+      height: 150px;
+    }
+    .PlayerChoice{
+      top: 20%; 
+      right: 20%; 
+    }
+    .Computer {
+      width: 150px;
+      height: 150px;
+    }
+    .Computer img{
+      width: 100px;
+      top: 20%; 
+      right: 20%;
+    }
+
+    .ResultDiv{
+      margin-top: 80%;
+      
+    }
+
+    .Result{
+      font-size: 50px;
+    }
 }

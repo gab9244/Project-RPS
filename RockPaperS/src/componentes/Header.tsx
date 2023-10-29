@@ -10,7 +10,7 @@ function Header() {
 
         <div className="HeaderLeft">
         <p id="score">Score</p>
-        <p id="points"></p>
+        <p id="points">0</p>
         </div>
     </div>
   );

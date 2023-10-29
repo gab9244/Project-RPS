@@ -6,50 +6,47 @@ function Main(){
     return(
        <> <div className="Main"> 
             <img src="/rock-paper-scissors-master/images/bg-triangle.svg" alt="A triangle" className="triangle" />
-            <div className="paperDiv"  onClick={Winner} >
+            <div className="paperDiv"   >
                 <img src="/rock-paper-scissors-master/images/icon-paper.svg" alt="Paper symbol" className="paper "  onClick={() => Choice('paper')}/>
                 </div>
-            <div className="scissorsDiv"  onClick={Winner}>
+            <div className="scissorsDiv"  >
                 <img src="/rock-paper-scissors-master/images/icon-scissors.svg" alt="Scissors symbol" className="scissors" onClick={() => Choice('scissors')}/>
             </div>
-            <div className="rockDiv" onClick={Winner}>
+            <div className="rockDiv" >
                 <img src="/rock-paper-scissors-master/images/icon-rock.svg" alt="Rock symbol" className="rock" onClick={() => Choice('rock')}/>
             </div>
         </div>
 
         <div className="WinnerDiv none">
-            <div className="Computer">
-                <img className="ComputerChoice" alt="Computer Choice" />
-           
-            </div>
+            <div className="Computer"></div>
             <div className="Player">
             <img  className=" PlayerChoice"/>
             </div>
-            <p></p>
-            <button className="newGame" onClick={startNewGame}>Play Again</button>
+            <div className='ResultDiv'>
+                <p className='Result'></p>
+                <button className="newGame" onClick={startNewGame}>Play Again</button>
+            </div>
 
         </div>
  </>
-    )
-
-    
-        function Winner(){
-            const main = document.querySelector('.Main')
-            const wDiv = document.querySelector('.WinnerDiv')
-            main?.classList.add('none')
-            wDiv?.classList.remove('none')
-
-        }
-        
+    ) 
        function Choice(choice:string){
+        //Add the result screen by removing the choice screen adding the none class to it and remove the class none of the result screen
+        const main = document.querySelector('.Main')
+        const wDiv = document.querySelector('.WinnerDiv')
+        main?.classList.add('none')
+        wDiv?.classList.remove('none')
+
+
         const img = document.querySelector('.PlayerChoice')
         const player = document.querySelector('.Player')
         const Computer = document.querySelector('.Computer')
+        const Result = document.querySelector('.Result')
 
-        const paperImg = document.createElement('img')
+        const paperImg = document.createElement('img')  
         paperImg.src = "/rock-paper-scissors-master/images/icon-paper.svg"
         paperImg.setAttribute('class','paperChoice')
-        paperImg.setAttribute('id','paperId')
+  
 
         const rockImg = document.createElement('img')
         rockImg.src = "/rock-paper-scissors-master/images/icon-rock.svg"
@@ -67,19 +64,35 @@ function Main(){
 
         if(random ==paperImg){
             Computer?.classList.add('hasPaper')
+            Computer?.classList.add('PlayerPaper')
+
             Computer?.classList.remove('hasRock')
             Computer?.classList.remove('hasScissors')
+
+            Computer?.classList.remove('PlayerRock')
+            Computer?.classList.remove('PlayerScissors')
         }
        
         if(random == rockImg){
             Computer?.classList.add('hasRock')
+            Computer?.classList.add('PlayerRock')
+
             Computer?.classList.remove('hasPaper')
             Computer?.classList.remove('hasScissors')
+
+            Computer?.classList.remove('PlayerPaper')
+            Computer?.classList.remove('PlayerScissors')
         }
         if(random == scissorsImg){
             Computer?.classList.add('hasScissors')
+            Computer?.classList.add('PlayerScissors')
+
+
             Computer?.classList.remove('hasRock')
             Computer?.classList.remove('hasPaper')
+
+            Computer?.classList.remove('PlayerPaper')
+            Computer?.classList.remove('PlayerRock')
         }
        
         if(choice == 'scissors' ) { 
@@ -98,16 +111,61 @@ function Main(){
             player?.setAttribute('class','PlayerRock Player')
         }
 
+        
         const points = document.getElementById('points')
-        
-        
-      
+  
         if(choice == 'scissors'&& Computer?.classList.contains('hasPaper')){
+            if(Result) Result.textContent = 'You win'
             if(points) points.textContent = `${increase}`
             setIncrease(increase +1) 
             
         }
         
+        if(choice == 'paper'&& Computer?.classList.contains('hasRock')){
+            if(Result) Result.textContent = 'You win'
+            if(points) points.textContent = `${increase}`
+            setIncrease(increase +1) 
+            
+        }
+
+        if(choice == 'rock'&& Computer?.classList.contains('hasScissors')){
+            if(Result) Result.textContent = 'You win'
+            if(points) points.textContent = `${increase}`
+            setIncrease(increase +1) 
+            
+        }
+
+
+        if(choice == 'scissors'&& Computer?.classList.contains('hasRock')){
+            if(Result) Result.textContent = 'You Lose'
+            
+        }
+        
+        if(choice == 'paper'&& Computer?.classList.contains('hasScissors')){
+            if(Result) Result.textContent = 'You Lose'
+            
+        }
+
+        if(choice == 'rock'&& Computer?.classList.contains('hasPaper')){
+            if(Result) Result.textContent = 'You Lose'
+            
+        }
+        
+        
+        if(choice == 'scissors'&& Computer?.classList.contains('hasScissors')){
+            if(Result) Result.textContent = 'Tie'
+            
+        }
+        
+        if(choice == 'paper'&& Computer?.classList.contains('hasPaper')){
+            if(Result) Result.textContent = 'Tie'
+            
+        }
+
+        if(choice == 'rock'&& Computer?.classList.contains('hasRock')){
+            if(Result) Result.textContent = 'Tie'
+            
+        }
 
 
        }
